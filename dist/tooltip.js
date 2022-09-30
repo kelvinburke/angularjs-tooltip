@@ -68,10 +68,7 @@
 
           init = function () {
             tooltip_gen = function(text){
-              console.log(text);
-              console.log(text.includes("<p>"));
               var template = '<div class="' + tpClass + '"></div>';
-              console.log(template);
               var elem =  angular.element(template);
               elem.html(text);
               return elem;
@@ -89,7 +86,6 @@
             var rect = elem[0].getBoundingClientRect();
             var newtext = elem[0].getAttribute('tp-text');
             tooltipElem = tooltip_gen(newtext);
-            console.log(tooltipElem)
             tooltip = $compile(tooltipElem)(scope);
             tooltip.css('position', 'absolute');
             tooltip.css('visibility', 'hidden');
@@ -140,7 +136,6 @@
           };
 
           handleMouseEnter = function () {
-            console.log('HELLO FROM TOOLTIPS!')
             toggle = true;
             elem[0].addEventListener('mouseleave', handleMouseLeave, false);
             $timeout(function () {
