@@ -4,7 +4,7 @@
  * @link http://github.com/jedanput
  * @license (c) 2015 MIT License
  */
-(function (angular) {
+ (function (angular) {
   'use strict';
 
   angular.module('tooltip.module', [])
@@ -68,12 +68,8 @@
 
           init = function () {
             tooltip_gen = function(text){
-              console.log(text);
-              var template = tpTpl || '<div class="' + tpClass + '">' + text + '</div>';
-              var elem = angular.element();
-              console.log(template);
-              console.log(elem);
-              return elem
+              console.log(text)
+              return angular.element('<div class="' + tpClass + '">' + text + '</div>');
             };
             tooltipElem = tooltip_gen(tpText);
 
