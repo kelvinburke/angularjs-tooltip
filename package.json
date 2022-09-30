@@ -1,10 +1,10 @@
 {
   "name": "tooltip",
-  "version": "0.1.1",
-  "author": "Samir Alajmovic <alajmovic.samir@gmail.com",
-  "homepage": "http://github.com/samiralajmovic",
-  "repository": "http://github.com/samiralajmovic/tooltip",
-  "description": "Light, customizable tooltip/popup for AngularJS",
+  "version": "0.1.2",
+  "author": "Samir Alajmovic <alajmovic.samir@gmail.com>, Kelvin Burke <kelv.burke@gmail.com>",
+  "homepage": "http://github.com/kelvinburke",
+  "repository": "http://github.com/kelvinburke/angularjs-tooltip",
+  "description": "Fork of alajmo/tooltip: Light, customizable tooltip/popup for Angular.js, used by optimamodel/optima",
   "license": "(c) 2015 MIT License",
   "keywords": [
     "tooltip",

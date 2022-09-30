@@ -2,3 +2,8 @@ v0.1.0:
   date: 2015-3-24
   changes:
     - Initial release.
+
+v0.1.2:
+  date: 2022-9-30
+  changes:
+    - On mouseenter, the tooltips will check tp-text again and refresh themselves.
