@@ -91,7 +91,6 @@
             tooltipElem = tooltip_gen(newtext);
             console.log(tooltipElem)
             tooltip = $compile(tooltipElem)(scope);
-            tooltip.text(newtext);
             tooltip.css('position', 'absolute');
             tooltip.css('visibility', 'hidden');
             addTooltip();
