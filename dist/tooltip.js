@@ -129,6 +129,7 @@
           };
 
           handleMouseEnter = function () {
+            console.log('HELLO FROM TOOLTIPS!')
             toggle = true;
             elem[0].addEventListener('mouseleave', handleMouseLeave, false);
             $timeout(function () {
