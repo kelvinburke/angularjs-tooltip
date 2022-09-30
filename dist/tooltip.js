@@ -79,7 +79,11 @@
 
           compileTemplate = function () {
             var rect = elem[0].getBoundingClientRect();
+            console.log('compileTemplate!')
+            var newtext = elem[0].getAttribute('tp-text');
             tooltip = $compile(tooltipElem)(scope);
+            console.log(newtext)
+            console.log(tooltip)
             tooltip.css('position', 'absolute');
             tooltip.css('visibility', 'hidden');
             addTooltip();
@@ -130,14 +134,12 @@
 
           handleMouseEnter = function () {
             console.log('HELLO FROM TOOLTIPS!')
-            console.log(elem)
-            console.log(attrs)
+            console.log(elem[0].getAttribute('tp-text'))
             toggle = true;
             elem[0].addEventListener('mouseleave', handleMouseLeave, false);
             $timeout(function () {
               if (toggle) {
                 compileTemplate();
-                console.log(tooltip)
                 tooltip[0].addEventListener('mouseleave', handleMouseLeave, false);
               }
             }, tpDelay);
