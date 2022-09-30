@@ -10,7 +10,7 @@
   angular.module('tooltip.module', [])
     .service('positionService', ['$window', function ($window) {
       return {
-        getPosition: function (tooltip, x, y, aX, aY, rect) {
+        setPosition: function (tooltip, x, y, aX, aY, rect) {
           // Normalize positions
           var posX = x / 100,
             posY = y / 100,
@@ -27,7 +27,8 @@
           posGlobX = posGlobX - tooltip[0].getBoundingClientRect().width * posAX;
           posGlobY = posGlobY - tooltip[0].getBoundingClientRect().height * posAY;
 
-          return {x: posGlobX, y: posGlobY};
+          tooltip.css('left',  posGlobX + 'px');
+          tooltip.css('top',  posGlobY + 'px');
         }
       };
     }])
@@ -59,11 +60,11 @@
             compileTemplate,
             addTooltip,
             removeTooltip,
-            setPosition,
             // Mouse Events
-            mouseEnter,
-            mouseLeave,
-            mouseClick;
+            handleMouseEnter,
+            handleMouseLeave,
+            handleMouseClick,
+            tooltip_gen;
 
           init = function () {
             tooltip_gen = function(text){
@@ -75,9 +76,9 @@
             tooltipElem = tooltip_gen(tpText);
 
             if (tpTriggerOn === 'click') {
-              elem[0].addEventListener('click', mouseClick, false);
+              elem[0].addEventListener('click', handleMouseClick, false);
             } else {
-              elem[0].addEventListener('mouseenter', mouseEnter, false);
+              elem[0].addEventListener('mouseenter', handleMouseEnter, false);
             }
           };
 
@@ -93,7 +94,8 @@
             // Use watch to fix visibility issue where getBoundingClientRect
             // shows width/height = 0 before element is appended to DOM.
             scope.$watch(tooltip, function () {
-              setPosition();
+              tooltip.css('visibility', 'visible');
+              positionService.setPosition(tooltip, x, y, aX, aY, rect);
             });
           };
 
@@ -119,7 +121,7 @@
             }
           };
 
-          mouseLeave = function (e) {
+          handleMouseLeave = function (e) {
             // Account for fast movement when mouseleave is fired before tooltip
             // is created.
             toggle = false;
@@ -128,23 +130,23 @@
               if (e.relatedTarget !== tooltip[0] &&
                   e.relatedTarget !== elem[0]) {
                 removeTooltip();
-                elem[0].removeEventListener('mouseleave', mouseLeave, false);
+                elem[0].removeEventListener('mouseleave', handleMouseLeave, false);
               }
             }
           };
 
-          mouseEnter = function () {
+          handleMouseEnter = function () {
             toggle = true;
-            elem[0].addEventListener('mouseleave', mouseLeave, false);
+            elem[0].addEventListener('mouseleave', handleMouseLeave, false);
             $timeout(function () {
               if (toggle) {
                 compileTemplate();
-                tooltip[0].addEventListener('mouseleave', mouseLeave, false);
+                tooltip[0].addEventListener('mouseleave', handleMouseLeave, false);
               }
             }, tpDelay);
           };
 
-          mouseClick = function () {
+          handleMouseClick = function () {
             toggle = !toggle;
             $timeout(function () {
               if (toggle === true) {
@@ -153,14 +155,6 @@
                 removeTooltip();
               }
             }, 0);
-          };
-
-          setPosition = function () {
-            var pos;
-            tooltip.css('visibility', 'visible');
-            pos = positionService.getPosition(tooltip, x, y, aX, aY, rect);
-            tooltip.css('left',  pos.x + 'px');
-            tooltip.css('top',  pos.y + 'px');
           };
 
           init();
