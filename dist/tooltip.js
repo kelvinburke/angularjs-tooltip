@@ -73,6 +73,7 @@
               var elem = angular.element();
               console.log(template);
               console.log(elem);
+              return elem
             };
             tooltipElem = tooltip_gen(tpText);
 
