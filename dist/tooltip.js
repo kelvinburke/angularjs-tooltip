@@ -63,12 +63,14 @@
             // Mouse Events
             handleMouseEnter,
             handleMouseLeave,
-            handleMouseClick;
+            handleMouseClick,
+            tooltip_gen;
 
           init = function () {
-            var tpl = tpTpl || '<div class="' + tpClass + '">' +
-              tpText + '</div>';
-            tooltipElem = angular.element(tpl);
+            tooltip_gen = function(text){
+              return angular.element(tpTpl || '<div class="' + tpClass + '">' + text + '</div>');
+            };
+            tooltipElem = tooltip_gen(tpText);
 
             if (tpTriggerOn === 'click') {
               elem[0].addEventListener('click', handleMouseClick, false);
@@ -80,6 +82,7 @@
           compileTemplate = function () {
             var rect = elem[0].getBoundingClientRect();
             var newtext = elem[0].getAttribute('tp-text');
+            tooltipElem = tooltip_gen(newtext);
             tooltip = $compile(tooltipElem)(scope);
             tooltip.text(newtext);
             tooltip.css('position', 'absolute');
