@@ -130,11 +130,14 @@
 
           handleMouseEnter = function () {
             console.log('HELLO FROM TOOLTIPS!')
+            console.log(elem)
+            console.log(attrs)
             toggle = true;
             elem[0].addEventListener('mouseleave', handleMouseLeave, false);
             $timeout(function () {
               if (toggle) {
                 compileTemplate();
+                console.log(tooltip)
                 tooltip[0].addEventListener('mouseleave', handleMouseLeave, false);
               }
             }, tpDelay);
