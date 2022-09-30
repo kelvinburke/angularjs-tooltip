@@ -69,7 +69,9 @@
           init = function () {
             tooltip_gen = function(text){
               console.log(text)
-              return angular.element('<div class="' + tpClass + '">' + text + '</div>');
+              var template = '<div class="' + tpClass + '">' + text + '</div>'
+              console.log(template)
+              return angular.element(template);
             };
             tooltipElem = tooltip_gen(tpText);
 
@@ -84,6 +86,7 @@
             var rect = elem[0].getBoundingClientRect();
             var newtext = elem[0].getAttribute('tp-text');
             tooltipElem = tooltip_gen(newtext);
+            console.log(tooltipElem)
             tooltip = $compile(tooltipElem)(scope);
             tooltip.text(newtext);
             tooltip.css('position', 'absolute');
