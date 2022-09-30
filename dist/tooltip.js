@@ -68,9 +68,9 @@
 
           init = function () {
             tooltip_gen = function(text){
-              console.log(text)
-              var template = '<div class="' + tpClass + '">' + text + '</div>'
-              console.log(template)
+              console.log(text);
+              var template = '<div class="' + tpClass + '">' + text + '</div>';
+              console.log(template);
               return angular.element(template);
             };
             tooltipElem = tooltip_gen(tpText);
